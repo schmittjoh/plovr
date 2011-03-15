@@ -1,0 +1,127 @@
+html {
+  /* Always show scrollbar to prevent the horizontal bouncing when navigating */
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0 auto 20px;
+  width: 800px;
+  font: 13px Arial, sans-serif;
+}
+
+code, pre {
+  color: green;
+}
+
+h1 {
+  float: left;
+  font-size: 24px;
+  text-shadow: 1px 1px 1px #FFF;
+  margin: 0;
+}
+
+h2 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+a {
+  color: #3A5FCD;
+}
+
+blockquote {
+  font: 20px Georgia, Times new roman, times, serif;
+  color: #AAA;
+}
+
+.heading {
+  margin-bottom: 8px;
+}
+
+.main-heading {
+  color: black;
+  padding: 6px 8px 6px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#EEE), to(#CCC));
+  background: -moz-linear-gradient(top,  #EEE,  #CCC);
+
+  -moz-border-radius-bottomleft: 6px;
+  -webkit-border-bottom-left-radius: 5px;
+
+  -moz-border-radius-bottomright: 6px;
+  -webkit-border-bottom-right-radius: 5px;  
+}
+
+.navigation-links {
+  font-size: 14px;
+  font-color: black;
+  line-height: 14px;
+  text-align: right;
+  list-style: none outside none;
+  margin: 0;
+  line-height: 30px;
+}
+
+.navigation-links li {
+  display: inline;
+  padding: 0 8px;
+  font-size: 16px;
+}
+
+.selected-link {
+  font-weight: bold;
+}
+
+.heading-backdrop, .secondary-heading {
+  background-color: #00A8A8;  
+}
+
+.secondary-heading {
+  color: white;
+  padding: 3px 0;
+  
+  -moz-border-radius-bottomleft: 6px;
+  -webkit-border-bottom-left-radius: 5px;
+
+  -moz-border-radius-bottomright: 6px;
+  -webkit-border-bottom-right-radius: 5px;  
+}
+
+.secondary-navigation-links {
+  margin: 0;
+  padding: 0;
+}
+
+.secondary-navigation-links li {
+  color: white;
+  display: inline;
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+.secondary-navigation-links li a {
+  color: white;
+}
+
+.caption {
+  margin: 0;
+  font-style: italic;  
+}
+
+.book-title {
+  font-style: italic;
+}
+
+.book-cover {
+  width: 252px;
+  height: 330px;
+  border: 1px solid #CCC;
+}
+
+.term {
+  font-style: italic;
+}
+
+.warning {
+  color: #A00;
+  font-weight: bold;
+}

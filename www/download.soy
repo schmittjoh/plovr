@@ -1,0 +1,63 @@
+{namespace plovr.download}
+
+/***/
+{template .base}
+
+{call plovr.header}
+  {param title: 'Download plovr' /}
+  {param selected: 'download.html' /}
+{/call}
+
+<p>
+You can <a href="http://code.google.com/p/plovr/downloads/list">download a
+pre-built binary of plovr from Google Code</a>.
+As you will see, binaries that are available for download are named with
+revision numbers from version control rather than with formal version numbers.
+This is because plovr is still in the alpha stage, as it merits more feedback
+from developers before the names of the configuration file properties,
+URLs, and query parameters can be frozen. Once developers have provided
+feedback and names have stabilized, an official beta will be released.
+</p>
+
+<p>
+plovr is open-sourced under the Apache 2.0 license.
+Its <a href="http://code.google.com/p/plovr/source/checkout">
+source code is available on Google Code</a> via a Mercurial repository.
+The plovr repository includes branches which are copies of the Closure Library,
+Closure Compiler, and Closure Templates source code, so building plovr is
+entirely self-contained:
+</p>
+
+{literal}<pre>hg clone https://plovr.googlecode.com/hg/ plovr
+cd plovr
+ant jar</pre>{/literal}
+
+<p>
+The resulting plovr binary will be available at <code>build/plovr.jar</code>.
+</p>
+
+<p>
+The process by which the branches for the Closure Tools are maintained within
+the plovr repository is{sp}
+<a href="http://code.google.com/p/plovr/wiki/MaintainingMirrorsOfClosureCodeInHg">
+explained on the wiki</a>.
+</p>
+
+<h2>Contribute to plovr by fixing bugs in other projects</h2>
+
+One important way that you can help with plovr development is by fixing bugs in other
+projects:
+
+<ul>
+  <li>
+    Firefox: <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=583083">
+    Let the eval {literal}//@sourceURL{/literal} trick work for stack traces</a>
+  </li>
+</ul>
+
+If you know someone working on these projects, a gentle nudge to get these bugs
+noticed and assigned to developers on the project would be a big help!
+
+{call plovr.footer /}
+
+{/template}
