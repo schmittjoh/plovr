@@ -1,0 +1,56 @@
+{namespace plovr.about}
+
+/***/
+{template .base}
+
+{call plovr.header}
+  {param title: 'About plovr' /}
+  {param selected: 'about.html' /}
+{/call}
+
+{call plovr.imageBookLink /}
+
+<p>
+I created plovr as a by-product of authoring
+{sp}<span class="book-title">Closure: The Definitive Guide</span>.
+In the introduction of the book, I explain how to get the
+Closure Compiler, Compiler Library, and Closure Templates to work together.
+This turned out to be a painful section to write because there are so many steps
+involved to get everything set up, and I knew there could be a more effective
+way.
+</p>
+
+<p>
+When I worked at Google, the build system there made it easier to leverage
+Closure, but it was by no means a one-liner. Some individual teams built
+additional infrastructure on top of Closure to facilitate the build process,
+but I did not see anything significant that was reused across teams.
+In creating plovr, I tried to create what I believe many frontend teams were
+trying to get at in the development of their own infrastructure for Closure. 
+</p>
+
+<p>
+I did not have a version of plovr working end-to-end until the weekend before
+the manuscript of the book was due, so rather than rewrite the introductory sections so they
+would be based on plovr, I tacked information on plovr at the end as an appendix
+and then sprinkled some references to it throughout the book.
+(This also seemed more appropriate than beginning the book by asserting
+that <em>my</em> tool should be used instead of the scripts maintained by Google,
+especially at a time when plovr had very few users.)
+</p>
+
+If you are curious about the name (plovr), it is candidly explained in
+Appendix C of <span class="book-title">Closure: The Definitive Guide</span>:
+
+<blockquote>
+&#8220;Its name is the product of the animal on the cover of this book,
+Web 2.0 zeitgeist, and domain name availability.&#8221;
+</blockquote>
+
+Some may argue that I am starting to develop a track record
+for <a href="http://groups.csail.mit.edu/uid/chickenfoot/faq.html#name">poorly named
+software projects</a>.
+
+{call plovr.footer /}
+
+{/template}
