@@ -451,6 +451,20 @@ public enum ConfigOption {
       builder.setDocumentationOutputDirectory(new File(fullPath));
     }
   }),
+  
+  VARIABLE_MAP_OUTPUT_PATH("variable-map-output-path", new ConfigUpdater() {
+    @Override
+    public void apply(String path, Config.Builder builder) {
+	  builder.setVariableMapOutputPath(path);
+    }
+  }),
+  
+  PROPERTY_MAP_OUTPUT_PATH("property-map-output-path", new ConfigUpdater() {
+    @Override
+    public void apply(String path, Config.Builder builder) {
+      builder.setPropertyMapOutputPath(path);
+    }
+  }),
   ;
 
   private static class ConfigUpdater {

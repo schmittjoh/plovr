@@ -67,6 +67,14 @@ public class BuildCommand extends AbstractCommandRunner<BuildCommandOptions> {
         System.err.println(warning);
       }
 
+      // write mapping files if requested
+      if (config.getVariableMapOutputPath() != null) {
+        result.variableMap.save(config.getVariableMapOutputPath());
+      }
+      if (config.getPropertyMapOutputPath() != null) {
+        result.propertyMap.save(config.getPropertyMapOutputPath());
+      }
+      
       ModuleConfig moduleConfig = config.getModuleConfig();
       if (moduleConfig == null) {
         System.out.println(compilation.getCompiledCode());

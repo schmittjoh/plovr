@@ -121,6 +121,10 @@ public final class Config implements Comparable<Config> {
   private final JsonObject experimentalCompilerOptions;
 
   private final String globalScopeName;
+  
+  private final String variableMapOutputPath;
+  
+  private final String propertyMapOutputPath;
 
   /**
    * Time this configuration was loaded
@@ -164,7 +168,9 @@ public final class Config implements Comparable<Config> {
       JsonObject experimentalCompilerOptions,
       File configFile,
       long timestamp,
-      String globalScopeName) {
+      String globalScopeName,
+      String variableMapOutputPath,
+      String propertyMapOutputPath) {
     Preconditions.checkNotNull(defines);
 
     this.id = id;
@@ -195,6 +201,8 @@ public final class Config implements Comparable<Config> {
     this.configFile = configFile;
     this.timestamp = timestamp;
     this.globalScopeName = globalScopeName;
+    this.variableMapOutputPath = variableMapOutputPath;
+    this.propertyMapOutputPath = propertyMapOutputPath;
   }
 
   public static Builder builder(File relativePathBase, File configFile,
@@ -303,6 +311,14 @@ public final class Config implements Comparable<Config> {
 
   public String getGlobalScopeName() {
     return globalScopeName;
+  }
+  
+  public String getVariableMapOutputPath() {
+	return variableMapOutputPath;
+  }
+  
+  public String getPropertyMapOutputPath() {
+	return propertyMapOutputPath;
   }
 
   public CompilerOptions getCompilerOptions(PlovrClosureCompiler compiler) {
@@ -663,6 +679,10 @@ public final class Config implements Comparable<Config> {
     private JsonObject experimentalCompilerOptions;
 
     private String globalScopeName;
+    
+    private String variableMapOutputPath;
+    
+    private String propertyMapOutputPath;
 
     private final Map<String, JsonPrimitive> defines;
 
@@ -720,6 +740,8 @@ public final class Config implements Comparable<Config> {
       this.disambiguateProperties = config.disambiguateProperties;
       this.experimentalCompilerOptions = config.experimentalCompilerOptions;
       this.globalScopeName = config.globalScopeName;
+      this.variableMapOutputPath = config.variableMapOutputPath;
+      this.propertyMapOutputPath = config.propertyMapOutputPath;
       this.defines = Maps.newHashMap(config.defines);
     }
 
@@ -926,6 +948,14 @@ public final class Config implements Comparable<Config> {
     public void setGlobalScopeName(String scope) {
       this.globalScopeName = scope;
     }
+    
+    public void setVariableMapOutputPath(String path) {
+      this.variableMapOutputPath = path;
+    }
+    
+    public void setPropertyMapOutputPath(String path) {
+      this.propertyMapOutputPath = path;
+    }
 
     public Config build() {
       File closureLibraryDirectory = pathToClosureLibrary != null
@@ -994,7 +1024,9 @@ public final class Config implements Comparable<Config> {
           experimentalCompilerOptions,
           configFile,
           lastModified,
-          globalScopeName);
+          globalScopeName,
+          variableMapOutputPath,
+          propertyMapOutputPath);
 
       return config;
     }

@@ -128,6 +128,14 @@ public class CompileRequestHandler extends AbstractGetHandler {
     Result result = compilation.getResult();
 
     if (result.success) {
+      // write mapping files if requested
+      if (null != config.getVariableMapOutputPath()) {
+    	result.variableMap.save(config.getVariableMapOutputPath());
+      }
+      if (null != config.getPropertyMapOutputPath()) {
+    	result.propertyMap.save(config.getPropertyMapOutputPath());
+      }
+    	
       if (config.getCompilationMode() == CompilationMode.WHITESPACE) {
         appendable.append("CLOSURE_NO_DEPS = true;\n");
       }
