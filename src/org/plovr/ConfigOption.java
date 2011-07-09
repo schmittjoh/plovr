@@ -465,6 +465,20 @@ public enum ConfigOption {
       builder.setPropertyMapOutputPath(path);
     }
   }),
+
+  VARIABLE_MAP_INPUT_PATH("variable-map-input-path", new ConfigUpdater() {
+    @Override
+    public void apply(String path, Config.Builder builder) {
+	  builder.setVariableMapInputPath(path);
+    }
+  }),
+  
+  PROPERTY_MAP_INPUT_PATH("property-map-input-path", new ConfigUpdater() {
+    @Override
+    public void apply(String path, Config.Builder builder) {
+      builder.setPropertyMapInputPath(path);
+    }
+  }),
   ;
 
   private static class ConfigUpdater {

@@ -41,6 +41,7 @@ import com.google.javascript.jscomp.CompilerOptions;
 import com.google.javascript.jscomp.CompilerPass;
 import com.google.javascript.jscomp.CustomPassExecutionTime;
 import com.google.javascript.jscomp.DiagnosticGroup;
+import com.google.javascript.jscomp.VariableMap;
 import com.google.javascript.jscomp.WarningLevel;
 import com.google.template.soy.xliffmsgplugin.XliffMsgPluginModule;
 
@@ -125,6 +126,10 @@ public final class Config implements Comparable<Config> {
   private final String variableMapOutputPath;
   
   private final String propertyMapOutputPath;
+  
+  private final String variableMapInputPath;
+  
+  private final String propertyMapInputPath;
 
   /**
    * Time this configuration was loaded
@@ -170,7 +175,9 @@ public final class Config implements Comparable<Config> {
       long timestamp,
       String globalScopeName,
       String variableMapOutputPath,
-      String propertyMapOutputPath) {
+      String propertyMapOutputPath,
+      String variableMapInputPath,
+      String propertyMapInputPath) {
     Preconditions.checkNotNull(defines);
 
     this.id = id;
@@ -203,6 +210,8 @@ public final class Config implements Comparable<Config> {
     this.globalScopeName = globalScopeName;
     this.variableMapOutputPath = variableMapOutputPath;
     this.propertyMapOutputPath = propertyMapOutputPath;
+    this.variableMapInputPath = variableMapInputPath;
+    this.propertyMapInputPath = propertyMapInputPath;
   }
 
   public static Builder builder(File relativePathBase, File configFile,
@@ -320,6 +329,14 @@ public final class Config implements Comparable<Config> {
   public String getPropertyMapOutputPath() {
 	return propertyMapOutputPath;
   }
+  
+  public String getVariableMapInputPath() {
+	return variableMapInputPath;
+  }
+  
+  public String getPropertyMapInputPath() {
+	return propertyMapInputPath;
+  }
 
   public CompilerOptions getCompilerOptions(PlovrClosureCompiler compiler) {
     Preconditions.checkArgument(compilationMode != CompilationMode.RAW,
@@ -415,7 +432,23 @@ public final class Config implements Comparable<Config> {
         options.setWarningLevel(group, checkLevel);
       }
     }
-
+    
+    // set input mapping files
+    if (null != variableMapInputPath) {
+      try {
+		options.inputVariableMapSerialized = VariableMap.load(variableMapInputPath).toBytes();
+	  } catch (IOException e) {
+		logger.severe("The variable map could not be loaded from: " + variableMapInputPath);
+	  }
+    }
+    if (null != propertyMapInputPath) {
+      try {
+    	options.inputPropertyMapSerialized = VariableMap.load(propertyMapInputPath).toBytes();
+      } catch (IOException e) {
+    	logger.severe("The property map could not be loaded from: " + propertyMapInputPath);
+      }
+    }
+    
     // This is a hack to work around the fact that a SourceMap
     // will not be created unless a file is specified to which the SourceMap
     // should be written.
@@ -683,6 +716,10 @@ public final class Config implements Comparable<Config> {
     private String variableMapOutputPath;
     
     private String propertyMapOutputPath;
+    
+    private String variableMapInputPath;
+    
+    private String propertyMapInputPath;
 
     private final Map<String, JsonPrimitive> defines;
 
@@ -742,6 +779,8 @@ public final class Config implements Comparable<Config> {
       this.globalScopeName = config.globalScopeName;
       this.variableMapOutputPath = config.variableMapOutputPath;
       this.propertyMapOutputPath = config.propertyMapOutputPath;
+      this.variableMapInputPath = config.variableMapInputPath;
+      this.propertyMapInputPath = config.propertyMapInputPath;
       this.defines = Maps.newHashMap(config.defines);
     }
 
@@ -956,6 +995,14 @@ public final class Config implements Comparable<Config> {
     public void setPropertyMapOutputPath(String path) {
       this.propertyMapOutputPath = path;
     }
+    
+    public void setVariableMapInputPath(String path) {
+      this.variableMapInputPath = path;
+    }
+    
+    public void setPropertyMapInputPath(String path) {
+      this.propertyMapInputPath = path;
+    }
 
     public Config build() {
       File closureLibraryDirectory = pathToClosureLibrary != null
@@ -1026,7 +1073,9 @@ public final class Config implements Comparable<Config> {
           lastModified,
           globalScopeName,
           variableMapOutputPath,
-          propertyMapOutputPath);
+          propertyMapOutputPath,
+          variableMapInputPath,
+          propertyMapInputPath);
 
       return config;
     }
